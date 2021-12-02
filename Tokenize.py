@@ -6,13 +6,29 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from collections import Counter
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
 from gensim.scripts.glove2word2vec import glove2word2vec
 from gensim.models import KeyedVectors
 
 # Create a dataframe from csv
 df = pd.read_csv('data_csv.csv', delimiter=',', names=["Category", "Desc", "ID"])
-job_list = df[df["Category"] != "resumes / job wanted"]
-resume_list = df[df["Category"] == "resumes / job wanted"]
+
+id = 1
+seen = {}
+
+for idx, row in df.iterrows():
+    if row.category == 'resumes / job wanted':
+        df.at[idx, 'Category'] = 0
+    else:
+        if row.category in seen:
+            df.at[idx, 'Category'] = seen[row.category]
+        else:
+            df.at[idx, 'Category'] = id
+            seen[row.category] = id
+            id += 1
+
+job_list = df[df["Category"] != 0]
+resume_list = df[df["Category"] == 0]
 
 #Part 1. Text representation (total 5 points)
 #1. Tokenize each post in the collection.
@@ -50,6 +66,11 @@ for post in job_list.Desc:
     processed_collection_j.append(joins)
 
 #print(processed_collection)
+
+X = processed_collection_r
+y = list(job_list.Category)
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=123)
 
 #4. Based on the output in step 3, convert each of the reviews in a TD-IDF vector.
 #The minimal document frequency for each term is 3. Also, include 2-gram.
