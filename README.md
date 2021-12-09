@@ -31,7 +31,7 @@ potential resumes and vice versa.
 
 ```/doc``` contains submission information (i.e. final presentation and report documents)
 
-## Group Memebers
+## Group Members
 Ryan Egbert
 
 Zainab Aljaroudi
