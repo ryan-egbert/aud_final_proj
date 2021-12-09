@@ -33,8 +33,12 @@ potential resumes and vice versa.
 
 ## Group Memebers
 Ryan Egbert
+
 Zainab Aljaroudi
+
 Puja Gupta
+
 Gagan Pahuja
+
 Mrugshitr Bansal
 
