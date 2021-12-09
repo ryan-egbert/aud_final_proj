@@ -88,7 +88,7 @@ def main():
 
     print(len(data))
     
-    with open("./aud/aud_final_proj/data/cl_data.pck", 'wb') as out:
+    with open("../pck/cl_data.pck", 'wb') as out:
         pck.dump(data, out)
 
 main()
